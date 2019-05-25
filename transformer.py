@@ -49,7 +49,6 @@ class SelfAttention(Layer):
                                    dtype='float32',
                                    initializer='glorot_uniform',
                                    trainable=True)
-        print(self.W_Q.dtype)
 
         super(SelfAttention, self).build(input_shape)
 
@@ -60,9 +59,6 @@ class SelfAttention(Layer):
         scaled_weights_mat = K.dot(Q, K.transpose(Key))/np.sqrt(self.output_dim) # check it
         attn_weights_mat = K.softmax(scaled_weights_mat)
         Z = K.dot(attn_weights_mat, V)
-        print(K.eval(self.W_Q))
-        print(K.eval(self.W_K))
-        print(K.eval(self.W_V))
         return Z
 
     def compute_output_shape(self, input_shape):
